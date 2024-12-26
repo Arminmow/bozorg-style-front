@@ -19,7 +19,7 @@ function HeroSection() {
       </div>
 
       {/* Title */}
-      <h1 className="hero-title position-absolute text-center">Bozorg Style</h1>
+      <h1 className="hero-title position-absolute text-center">BOZORG STYLE</h1>
     </div>
   );
 }
