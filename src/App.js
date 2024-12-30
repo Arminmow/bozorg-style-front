@@ -1,6 +1,6 @@
-import logo from './logo.svg';
-import './App.css';
-import Home from './pages/Home/Home';
+import "./App.css";
+import Home from "./pages/Home/Home";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
     //     </a>
     //   </header>
     // </div>
-    <Home/>
+    <Home />
   );
 }
 

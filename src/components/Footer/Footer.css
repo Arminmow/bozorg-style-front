@@ -1,0 +1,80 @@
+/* Footer Base Styles */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    direction: rtl; /* Set the overall layout to RTL */
+  }
+  
+  /* Footer Content Flexbox */
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+  }
+  
+  /* Footer Content Div Styling */
+  .footer-content div {
+    flex: 1;
+    min-width: 200px;
+    text-align: right; /* Align text to the right for RTL languages */
+  }
+  
+  /* Title Styling */
+  .footer h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+  
+  /* Social Media Section */
+  .social-media ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: right; /* Align social media links to the right */
+  }
+  
+  .social-media li {
+    margin: 10px 0;
+  }
+  
+  .social-link {
+    color: #ff4477;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+  
+  .social-link:hover {
+    color: #e63963;
+    transform: translateX(5px);
+  }
+  
+  /* Contact Info Section */
+  .contact-info p {
+    margin: 5px 0;
+    text-align: right; /* Ensure contact info aligns to the right */
+  }
+  
+  /* Map Styling */
+  .map-container iframe {
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+    margin: 10px 0;
+  }
+  
+  /* Footer Bottom Section */
+  .footer-bottom {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    border-top: 1px solid #555;
+    padding-top: 10px;
+    text-align: right; /* Align footer text to the right */
+  }
+  
