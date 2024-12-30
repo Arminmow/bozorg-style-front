@@ -20,11 +20,11 @@
   }
   
   .hero-image:hover {
-    flex-grow: 1.2;
+    flex-grow: 1.03;
   }
   
   .hero-image:hover img {
-    transform: scale(1.1);
+    transform: scale(1.02);
   }
   
   /* Buttons */
@@ -33,7 +33,7 @@
     bottom: 10%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #ff4477;
+    background-color: #d9384a;
     color: #fff;
     padding: 10px 20px;
     border: none;
