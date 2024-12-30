@@ -1,24 +1,45 @@
-import React from 'react';
-import './Navbar.css';  // Importing the custom CSS
+import React from "react";
+import "./Navbar.css";
 
-const Navbar = () => {
+function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-custom">
+    <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">BozorgStyle</a>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        {/* Hamburger Menu (Mobile) */}
+        <button
+          className="navbar-toggler order-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
+
+        {/* Logo */}
+        <a className="navbar-brand order-1" href="#">
+          بزرگ استایل
+        </a>
+
+        {/* User Icon */}
+        <a className="order-2 user-icon" href="#">
+          <i className="fas fa-user"></i>
+        </a>
+
+        {/* Navbar Links (Desktop) */}
+        <div className="collapse navbar-collapse order-3" id="navbarNav">
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link" href="#">زنانه</a>
+              <a className="nav-link" href="#">
+                خانه
+              </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">مردانه</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">حراج</a>
+              <a className="nav-link" href="#">
+                درباره ما
+              </a>
             </li>
           </ul>
         </div>
