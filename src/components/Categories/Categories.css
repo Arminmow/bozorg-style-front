@@ -1,0 +1,75 @@
+/* Categories Section */
+.categories-section {
+    padding: 50px 20px;
+    text-align: center;
+  }
+  
+  .categories-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  /* Container for the categories */
+  .categories-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  /* Individual category item */
+  .category-item {
+    flex: 1 1 calc(33.33% - 20px); /* Each item takes up a third of the row */
+    max-width: calc(33.33% - 20px); /* Prevent items from exceeding one-third width */
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  
+  .category-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .category-item:hover img {
+    transform: scale(1.05);
+  }
+  
+  /* Category Button Overlay */
+  .category-btn {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #d9384a;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    transform-origin: center; /* Ensures scaling happens from the center */
+}
+
+.category-btn:hover {
+    transform: translateX(-50%) scale(1.2); /* Scales without shifting position */
+    background-color: #b52e3e; /* Slightly darker hover effect */
+    color: #fff;
+}
+  
+  /* Responsive Adjustments */
+  @media (max-width: 992px) {
+    .category-item {
+      flex: 1 1 100%; /* Stack items vertically on mobile */
+      max-width: 100%;
+    }
+  
+    .categories-title {
+      font-size: 2rem;
+    }
+  }
+  
