@@ -1,6 +1,7 @@
 import "./App.css";
 import Home from "./pages/Home/Home";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import LoginPage from "./pages/Login/Login";
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
     //     </a>
     //   </header>
     // </div>
-    <Home />
+    // <Home />
+    <LoginPage/>
   );
 }
 
