@@ -1,6 +1,7 @@
 /* Navbar Styling */
 .navbar {
-    background-color: #e63963; /* Red-pink background */
+    background-color: #d9384a;
+    padding-inline: 2rem;
   }
   
   .navbar-brand,
@@ -12,13 +13,13 @@
   .navbar-brand:hover,
   .nav-link:hover,
   .user-icon:hover {
-    color: #ff4777; /* Cool hover effect: lighter red-pink */
+    color: #8f2531; /* Cool hover effect: lighter red-pink */
     text-decoration: none; /* Remove underline on hover */
   }
   
   /* User Icon Styling */
   .user-icon {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     cursor: pointer;
     margin-left: 1rem;
   }
@@ -30,7 +31,7 @@
   }
   
   .nav-link:hover {
-    color: #ff4777; /* Hover color for links */
+    color: #8f2531; /* Hover color for links */
   }
   
   /* Navbar Dropdown */
