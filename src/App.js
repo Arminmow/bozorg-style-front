@@ -2,6 +2,7 @@ import "./App.css";
 import Home from "./pages/Home/Home";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import LoginPage from "./pages/Login/Login";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -22,7 +23,13 @@ function App() {
     //   </header>
     // </div>
     // <Home />
-    <LoginPage/>
+    <Routes>
+      {/* Define Routes */}
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<LoginPage />} />
+      {/* Catch-All Route */}
+      {/* <Route path="*" element={<NotFoundPage />} /> */}
+    </Routes>
   );
 }
 
