@@ -1,5 +1,6 @@
 import React from "react";
 import "./Navbar.css";
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
@@ -24,9 +25,9 @@ function Navbar() {
         </a>
 
         {/* User Icon */}
-        <a className="order-2 user-icon" href="#">
+        <Link className="order-2 user-icon" to="/login">
           <i className="fas fa-user"></i>
-        </a>
+        </Link>
 
         {/* Navbar Links (Desktop) */}
         <div className="collapse navbar-collapse order-3" id="navbarNav">

@@ -2,6 +2,7 @@ import React from "react";
 import "./Login.css"; // External CSS
 import loginImg from '../../assets/images/login.jpg'
 import loginImg2 from '../../assets/images/login2.png'
+import { Link } from 'react-router-dom';
 
 
 function LoginPage() {
@@ -10,7 +11,7 @@ function LoginPage() {
       {/* Form Section */}
       <div className="form-section">
         <div className="logo">
-          <h1>بزرگ استایل</h1>
+          <Link className="Link" to="/"><h1>بزرگ استایل</h1></Link>
         </div>
 
         {/* Instruction Text */}
