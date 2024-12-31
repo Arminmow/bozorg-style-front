@@ -1,0 +1,106 @@
+/* Set up full height for the login page */
+.login-page {
+    display: flex;
+    height: 100vh;
+    flex-direction: row; /* Default for desktop */
+  }
+  
+  /* Form section styling */
+  .form-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #d9384a; /* Dark red-pink color */
+    padding: 20px;
+    color: white;
+   
+  }
+  
+  .logo h1 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+  }
+  
+  .login-form {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .login-form input {
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .login-form button {
+    padding: 10px;
+    font-size: 1.1rem;
+    background-color: #fff;
+    color: #d9384a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .login-form button:hover {
+    background-color: #e63963;
+    color: white;
+  }
+  
+  /* Image Section */
+  .image-section {
+    flex: 0.35; /* 20% width for the image on desktop */
+  }
+  
+  .image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Mobile View - Reverse Flex Layout */
+  @media (max-width: 768px) {
+    .login-page {
+      flex-direction: column-reverse; /* Reverse the order of the sections */
+    }
+  
+    .image-section {
+      width: 100%; /* Image takes full width on mobile */
+      flex: 0.2;
+      z-index: 2;
+      position: absolute;
+      top: 0;
+    }
+  
+    .form-section {
+      padding: 15px;
+      width: 100%;
+      justify-content: end;
+      padding-block-end: 20vh;
+    }
+  
+    .logo h1 {
+      font-size: 1.5rem;
+    }
+  
+    .login-form {
+      width: 90%;
+      max-width: 350px;
+    }
+  
+    .login-form input {
+      padding: 8px;
+      font-size: 0.9rem;
+    }
+  
+    .login-form button {
+      font-size: 1rem;
+    }
+  }
+  
