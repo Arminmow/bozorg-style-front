@@ -20,9 +20,9 @@ function Navbar() {
         </button>
 
         {/* Logo */}
-        <a className="navbar-brand order-1" href="#">
+        <Link className="navbar-brand order-1" to="/">
           بزرگ استایل
-        </a>
+        </Link>
 
         {/* User Icon */}
         <Link className="order-2 user-icon" to="/login">

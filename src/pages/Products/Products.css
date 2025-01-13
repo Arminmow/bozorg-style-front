@@ -1,0 +1,20 @@
+/* Category Header Styles */
+.category-header {
+    text-align: center;
+    padding: 2rem;
+    margin-bottom: 2rem; /* Space below the header */
+    border-bottom: 1px solid #ddd; /* Light border at the bottom */
+  }
+  
+  .category-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333; /* Dark color for the title */
+  }
+  
+  .category-description {
+    font-size: 1rem;
+    color: #777; /* Lighter color for the description */
+    margin-top: 8px; /* Some space above the description */
+  }
+  
