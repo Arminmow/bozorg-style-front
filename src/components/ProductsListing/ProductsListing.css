@@ -21,7 +21,7 @@
   /* Product image */
   .product-image {
     width: 100%;
-    height: auto;
+    height: 25rem;
     display: block;
     object-fit: cover;
     transition: opacity 0.2s ease;
@@ -46,6 +46,7 @@
 
   .product-image-wrapper {
     position: relative;
+    margin-bottom: 0.5rem;
   }
 
   .product-image.hover {

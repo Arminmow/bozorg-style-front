@@ -1,23 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductsListing.css";
-
-// Function to generate fake products
-const generateFakeProducts = () => {
-  const products = [];
-  for (let i = 1; i <= 40; i++) {
-    products.push({
-      id: i,
-      image: `https://i.ibb.co/3F5hdYp/Snapinsta-app-470083965-370741172767472-7700122896393507206-n-1080.jpg`, // Default image
-      hoverImage: `https://i.ibb.co/sQzGrwM/Snapinsta-app-470273645-888491010121118-9106333574942303522-n-1080.jpg`, // Hover image
-      description: `ایتم ${i} - یک ایتم باور نکردنی`, // Random description
-      price: `${(Math.random() * 100 + 10).toFixed(2)}T`, // Random price between $10 and $110
-    });
-  }
-  return products;
-};
+import axiosInstance from "../../api/axios";
 
 const ProductListing = () => {
-  const products = generateFakeProducts();
+
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Fetch all products on component mount
+    const fetchProducts = async () => {
+      try {
+        const response = await axiosInstance.get("products/men");
+        setProducts(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError("Failed to fetch products.");
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  console.log(products)
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div className="product-listing">
@@ -30,11 +44,12 @@ const ProductListing = () => {
               className="product-image default"
             />
             <img
-              src={product.hoverImage}
+              src={product.images && product.images[1] ? product.images[1].image_path : ''}
               alt={`Product ${product.id} Hover`}
               className="product-image hover"
             />
           </div>
+          <div>{product.name}</div>
           <div className="product-description">{product.description}</div>
           <div className="product-price">{product.price}</div>
         </div>
