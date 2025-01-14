@@ -28,7 +28,7 @@ function App() {
       {/* Define Routes */}
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/men" element={<ProductsPage />} />
+      <Route path="/:gender" element={<ProductsPage />} />
       {/* Catch-All Route */}
       {/* <Route path="*" element={<NotFoundPage />} /> */}
     </Routes>

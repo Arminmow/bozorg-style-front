@@ -2,15 +2,9 @@ import React, { useState, useEffect } from "react";
 import axiosInstance from "../../api/axios";
 import "./Filter.css";
 
-const FilterComponent = ({ setFilteredProducts }) => {
+const FilterComponent = ({ setFilters, filters }) => {
   const [categories, setCategories] = useState([]);
-
-  const [filters, setFilters] = useState({
-    name: "",
-    min_price: "",
-    max_price: "",
-    category: "",
-  });
+  const [params, setparams] = useState({});
 
   const [isCollapsed, setIsCollapsed] = useState(false); // For handling collapsible filter
 
@@ -26,7 +20,7 @@ const FilterComponent = ({ setFilteredProducts }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFilters((prevState) => ({
+    setparams((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -34,35 +28,11 @@ const FilterComponent = ({ setFilteredProducts }) => {
 
   const handleFilterSubmit = async (e) => {
     e.preventDefault();
-    try {
-      let url = "products"; // Default URL
-      
-      // Fetch filtered products based on the selected filters
-      const params = {};
 
-      // Add parameters conditionally if they exist
-      if (filters.name) {
-        params.name = filters.name;
-      }
-      if (filters.min_price) {
-        params.min_price = filters.min_price;
-      }
-      if (filters.max_price) {
-        params.max_price = filters.max_price;
-      }
-      if (filters.category) {
-        params.category_id = filters.category;
-      }
-
-      const response = await axiosInstance.get(url, {
-        params,
-      });
-      console.log(response);
-
-      setFilteredProducts(response.data);
-    } catch (error) {
-      console.error("Error applying filters:", error);
-    }
+    setFilters((prevFilters) => ({
+      ...prevFilters, // Keep existing filters
+      ...params, // Add or override with new parameters
+    }));
   };
 
   const toggleCollapse = () => {
@@ -83,7 +53,7 @@ const FilterComponent = ({ setFilteredProducts }) => {
               type="text"
               id="name"
               name="name"
-              value={filters.name}
+            //   value={filters.name}
               onChange={handleInputChange}
               placeholder="Search by name"
             />
@@ -95,7 +65,7 @@ const FilterComponent = ({ setFilteredProducts }) => {
               type="number"
               id="min_price"
               name="min_price"
-              value={filters.min_price}
+            //   value={filters.min_price}
               onChange={handleInputChange}
               placeholder="Min price"
             />
@@ -107,7 +77,7 @@ const FilterComponent = ({ setFilteredProducts }) => {
               type="number"
               id="max_price"
               name="max_price"
-              value={filters.max_price}
+            //   value={filters.max_price}
               onChange={handleInputChange}
               placeholder="Max price"
             />
@@ -117,8 +87,8 @@ const FilterComponent = ({ setFilteredProducts }) => {
             <label htmlFor="category">Category</label>
             <select
               id="category"
-              name="category"
-              value={filters.category}
+              name="category_id"
+            //   value={filters.category}
               onChange={handleInputChange}
             >
               <option value="">All Categories</option>
