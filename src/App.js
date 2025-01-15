@@ -5,6 +5,7 @@ import LoginPage from "./pages/Login/Login";
 import { Routes, Route } from "react-router-dom";
 import ProductsPage from "./pages/Products/Products";
 
+
 function App() {
   return (
     // <div className="App">
@@ -28,7 +29,7 @@ function App() {
       {/* Define Routes */}
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/men" element={<ProductsPage />} />
+      <Route path="/:gender" element={<ProductsPage />} />
       {/* Catch-All Route */}
       {/* <Route path="*" element={<NotFoundPage />} /> */}
     </Routes>

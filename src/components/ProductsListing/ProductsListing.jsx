@@ -1,45 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./ProductsListing.css";
-import axiosInstance from "../../api/axios";
 
-const ProductListing = () => {
-
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    // Fetch all products on component mount
-    const fetchProducts = async () => {
-      try {
-        const response = await axiosInstance.get("products/men");
-        setProducts(response.data);
-        setLoading(false);
-      } catch (err) {
-        setError("Failed to fetch products.");
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
-  console.log(products)
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
+const ProductListing = ({products}) => {
+  
   return (
+    
     <div className="product-listing">
-      {products.map((product) => (
+      { products ? products.map((product) => (
         <div key={product.id} className="product">
           <div className="product-image-wrapper">
             <img
-              src={product.image}
+              src={product.images && product.images[0] ? product.images[0].image_path : ''}
               alt={`Product ${product.id}`}
               className="product-image default"
             />
@@ -53,7 +24,7 @@ const ProductListing = () => {
           <div className="product-description">{product.description}</div>
           <div className="product-price">{product.price}</div>
         </div>
-      ))}
+      )) : ''}
     </div>
   );
 };
