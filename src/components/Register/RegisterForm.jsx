@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./RegisterForm.css";
 import { validateField } from "../../modules/Validate/ValidateField";
+import axiosInstance from "../../api/axios";
 import { Link } from "react-router-dom";
 
-const RegisterForm = ({ onSubmit }) => {
+const RegisterForm = () => {
   const [formValues, setFormValues] = useState({
     name: "",
     email: "",
@@ -30,9 +31,28 @@ const RegisterForm = ({ onSubmit }) => {
     Object.values(errors).some((error) => error !== "") ||
     Object.values(formValues).some((value) => value === "");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(formValues);
+    try {
+        const response = await axiosInstance.post("/register", {
+          name: formValues.name,
+          email: formValues.email,
+          password: formValues.password,
+        });
+  
+        console.log(response.data);
+  
+        const { token } = response.data;
+  
+        // Store the JWT token securely
+        localStorage.setItem("jwtToken", token);
+        window.location.href = "/";
+  
+        alert("Registration successful");
+      } catch (err) {
+        console.error(err);
+        alert(err.response?.data?.message || "Registration failed");
+      }
   };
 
   return (
