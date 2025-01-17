@@ -47,7 +47,7 @@ function Navbar() {
       )}
 
         {/* User Icon */}
-        <Link className="order-2 user-icon" to="/login">
+        <Link className="order-2 user-icon" to="/register">
           <i className="fas fa-user"></i>
         </Link>
 
