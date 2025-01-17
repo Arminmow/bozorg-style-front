@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import UserContext from "../../contexts/UserContext";
 
 const UserInfoComponent = () => {
+  const { user } = useContext(UserContext);
   return (
     <div className="user-info-content p-4 bg-white rounded shadow-sm">
       <h3>اطلاعات کاربر</h3>
-      <p>
-        .به داشبورد خود خوش آمدید! اینجا می‌توانید اطلاعات شخصی خود را مشاهده و مدیریت کنید
-      </p>
+      {user ? (
+          <p>Welcome, {user.name}</p> // Display user name if logged in
+        ) : (
+          <p>Not logged in</p>
+        )}
     </div>
   );
 };

@@ -6,26 +6,29 @@ import ProductsPage from "./pages/Products/Products";
 import AuthPage from "./pages/Login/AuthPage";
 import DashboardPage from "./pages/Dashboard/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import { UserProvider } from "./contexts/UserContext";
 
 function App() {
   return (
-    <Routes>
-      {/* Define Routes */}
-      <Route path="/" element={<Home />} />
-      <Route path="/register" element={<AuthPage />} />
-      <Route path="/login" element={<AuthPage />} />
-      <Route path="/:gender" element={<ProductsPage />} />
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <DashboardPage />
-          </ProtectedRoute>
-        }
-      />
-      {/* Catch-All Route */}
-      {/* <Route path="*" element={<NotFoundPage />} /> */}
-    </Routes>
+    <UserProvider>
+      <Routes>
+        {/* Define Routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<AuthPage />} />
+        <Route path="/login" element={<AuthPage />} />
+        <Route path="/:gender" element={<ProductsPage />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <DashboardPage />
+            </ProtectedRoute>
+          }
+        />
+        {/* Catch-All Route */}
+        {/* <Route path="*" element={<NotFoundPage />} /> */}
+      </Routes>
+    </UserProvider>
   );
 }
 

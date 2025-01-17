@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import UserContext from "../../contexts/UserContext";
 import { ListGroup, ListGroupItem } from "reactstrap";
 import "./DashboardSidebar.css";
 
@@ -6,18 +7,15 @@ const DashboardSidebar = ({ setActiveComponent }) => {
   const handleOptionClick = (option) => {
     setActiveComponent(option);
   };
+  const { user } = useContext(UserContext);
+  console.log(user);
 
   return (
     <div className="sidebar bg-light p-3 rounded shadow-sm">
       {/* User Info Section */}
       <div className="user-info text-center mb-4">
-        <img
-          src="https://via.placeholder.com/100"
-          alt="کاربر"
-          className="rounded-circle mb-2"
-        />
-        <h5 className="mb-1">علی رضایی</h5>
-        <p className="text-muted">ali.rezaei@example.com</p>
+        <h5 className="mb-1">{user && user.name}</h5>
+        <p className="text-muted">{user && user.email}</p>
       </div>
 
       {/* Navigation Options */}
