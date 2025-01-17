@@ -108,3 +108,9 @@
     text-decoration: none;
     color: #fff;
   }
+
+  form .invalid-feedback {
+    color: #4B0000 ; /* Dark red */
+    font-weight: bold;
+  }
+  

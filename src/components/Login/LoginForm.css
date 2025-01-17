@@ -1,0 +1,15 @@
+.auth-footer {
+    text-align: center; 
+    margin-top: 20px; 
+    font-size: 0.9rem;  
+  }
+  
+  .auth-footer a {
+    color: #00FFFF     ; 
+    text-decoration: none; 
+  }
+  
+  .auth-footer a:hover {
+    text-decoration: underline; /* Adds underline on hover for clarity */
+  }
+  
