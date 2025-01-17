@@ -44,10 +44,12 @@ function LoginPage() {
       });
 
       console.log(response.data);
-      const { token, user } = response.data;
-      localStorage.setItem("authToken", token);
-      console.log(token);
-      console.log(user);
+
+      const { token } = response.data;
+
+      // Store the JWT token securely
+      localStorage.setItem("jwtToken", token);
+      window.location.href = "/";
 
       alert("Registration successful");
     } catch (err) {
