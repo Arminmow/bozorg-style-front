@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import axiosInstance from "../../api/axios";
 
 function Navbar() {
-  const [user, setUser] = useState(null);
 
   return (
     <nav className="navbar navbar-expand-lg">

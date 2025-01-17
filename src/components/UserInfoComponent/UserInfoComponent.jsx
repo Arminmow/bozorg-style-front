@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import UserContext from "../../contexts/UserContext";
+import ShowForAdmin from "../../modules/ShowForAdmin/ShowForAdmin";
 
 const UserInfoComponent = () => {
   const { user } = useContext(UserContext);
@@ -11,6 +12,9 @@ const UserInfoComponent = () => {
         ) : (
           <p>Not logged in</p>
         )}
+        <ShowForAdmin user={user}>
+          <h1>HAHA</h1>
+        </ShowForAdmin>
     </div>
   );
 };
