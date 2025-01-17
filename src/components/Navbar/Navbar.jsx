@@ -1,4 +1,4 @@
-import React , {useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import axiosInstance from "../../api/axios";
@@ -12,7 +12,9 @@ function Navbar() {
         const response = await axiosInstance.get("/user");
         setUser(response.data.user);
       } catch (err) {
-        console.log("User not logged in");
+        console.error("User not logged in or token invalid");
+        localStorage.removeItem("jwtToken"); // Remove the invalid/expired token
+        setUser(null); // Clear any existing user data
       }
     };
 
@@ -40,11 +42,7 @@ function Navbar() {
           بزرگ استایل
         </Link>
 
-        {user ? (
-        <span>Welcome, {user.name}!</span>
-      ) : (
-        <span>Please log in</span>
-      )}
+        {user ? <span>Welcome, {user.name}!</span> : <span>Please log in</span>}
 
         {/* User Icon */}
         <Link className="order-2 user-icon" to="/register">

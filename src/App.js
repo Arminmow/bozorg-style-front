@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import ProductsPage from "./pages/Products/Products";
 import AuthPage from "./pages/Login/AuthPage";
 import DashboardPage from "./pages/Dashboard/Dashboard";
-
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 function App() {
   return (
@@ -15,7 +15,14 @@ function App() {
       <Route path="/register" element={<AuthPage />} />
       <Route path="/login" element={<AuthPage />} />
       <Route path="/:gender" element={<ProductsPage />} />
-      <Route path="/dashboard" element={<DashboardPage />} />
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
       {/* Catch-All Route */}
       {/* <Route path="*" element={<NotFoundPage />} /> */}
     </Routes>
