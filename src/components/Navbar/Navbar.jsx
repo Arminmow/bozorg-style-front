@@ -1,23 +1,10 @@
-import React , {useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import axiosInstance from "../../api/axios";
 
 function Navbar() {
   const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axiosInstance.get("/user");
-        setUser(response.data.user);
-      } catch (err) {
-        console.log("User not logged in");
-      }
-    };
-
-    fetchUser();
-  }, []);
 
   return (
     <nav className="navbar navbar-expand-lg">
@@ -39,12 +26,6 @@ function Navbar() {
         <Link className="navbar-brand order-1" to="/">
           بزرگ استایل
         </Link>
-
-        {user ? (
-        <span>Welcome, {user.name}!</span>
-      ) : (
-        <span>Please log in</span>
-      )}
 
         {/* User Icon */}
         <Link className="order-2 user-icon" to="/register">
