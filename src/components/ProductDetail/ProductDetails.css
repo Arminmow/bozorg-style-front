@@ -1,6 +1,7 @@
-/* Adding RTL styles
-.rtl-text {
-    text-align: right;
-    direction: rtl;
+
+  @media (max-width: 992px) {
+    .rtl-text {
+      text-align: center;
+      direction: rtl;
+    }
   }
-   */

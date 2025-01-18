@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ProductsListing.css";
+import { Link } from "react-router-dom";
 
 const ProductListing = ({products}) => {
   
@@ -8,7 +9,7 @@ const ProductListing = ({products}) => {
     <div className="product-listing">
       { products ? products.map((product) => (
         <div key={product.id} className="product">
-          <div className="product-image-wrapper">
+          <Link to={`/product/${product.id}`} className="product-image-wrapper">
             <img
               src={product.images && product.images[0] ? product.images[0].image_path : ''}
               alt={`Product ${product.id}`}
@@ -19,7 +20,7 @@ const ProductListing = ({products}) => {
               alt={`Product ${product.id} Hover`}
               className="product-image hover"
             />
-          </div>
+          </Link>
           <div>{product.name}</div>
           <div className="product-description">{product.description}</div>
           <div className="product-price">{product.price}</div>
