@@ -6,6 +6,7 @@ import Footer from "../../components/Footer/Footer";
 import ProductDetails from "../../components/ProductDetail/ProductDetails";
 import ProductImages from "../../components/ProductDetail/ProductImages";
 import { getProductById } from "../../modules/GetProductById/getProductById";
+import { addToCart } from "../../modules/AddToCart/addToCart";
 
 function ProductDetailPage() {
   const [product, setProduct] = useState(null);
@@ -32,6 +33,15 @@ function ProductDetailPage() {
     return <div>Loading...</div>;
   }
 
+  const handleAddToCart = async () => {
+    try {
+      await addToCart(productId, 1);;
+      alert("Product added to cart successfully!");
+    } catch (error) {
+      alert("Failed to add product to cart. Please try again.");
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -46,7 +56,7 @@ function ProductDetailPage() {
             name={product.name}
             description={product.description}
             price={product.price}
-            onAddToCart={() => alert("Add to Cart Clicked!")}
+            onAddToCart={handleAddToCart}
           />
         </div>
       </div>
