@@ -8,6 +8,7 @@ import DashboardPage from "./pages/Dashboard/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import ProductDetailPage from "./pages/ProductDetil/ProductDetailPage";
 import Providers from "./providers/Providers";
+import AddProductPage from "./pages/AddProductPage/AddProductPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" element={<AuthPage />} />
         <Route path="/:gender" element={<ProductsPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
+        <Route path="/product/add" element={<AddProductPage />} />
         <Route
           path="/dashboard"
           element={
