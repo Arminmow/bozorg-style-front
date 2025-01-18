@@ -19,7 +19,7 @@
   }
   
   .thumbnail-img.active {
-    border: 2px solid blue;
+    border: 5px solid #d9384a;
   }
   
   .main-image {
