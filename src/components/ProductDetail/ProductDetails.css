@@ -1,0 +1,7 @@
+
+  @media (max-width: 992px) {
+    .rtl-text {
+      text-align: center;
+      direction: rtl;
+    }
+  }
