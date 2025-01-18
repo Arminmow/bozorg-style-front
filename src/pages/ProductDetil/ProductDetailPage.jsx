@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import "./ProductDetailPage.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
+import ProductDetails from "../../components/ProductDetail/ProductDetails";
+import ProductImages from "../../components/ProductDetail/ProductImages";
 
 function ProductDetailPage() {
   const navigate = useNavigate();
@@ -75,44 +77,20 @@ function ProductDetailPage() {
       <Navbar />
       <div className="product-detail-container container mt-5 mb-5">
         <div className="row">
-          {/* Images Section */}
-          <div className="col-md-6 d-flex mb-5">
-            {/* Thumbnails */}
-            <div className="thumbnails me-3">
-              {product.images.map((image) => (
-                <img
-                  key={image.id}
-                  src={image.image_path}
-                  alt={`Thumbnail ${image.id}`}
-                  className={`thumbnail-img ${
-                    mainImage === image.image_path ? "active" : ""
-                  }`}
-                  onClick={() => setMainImage(image.image_path)}
-                />
-              ))}
-            </div>
-
-            {/* Main Image */}
-            <div className="main-image">
-              <img src={mainImage} alt="Main Product" className="main-img" />
-            </div>
-          </div>
-
-          {/* Product Details */}
-          <div className="col-md-6">
-            <h1>{product.name}</h1>
-            <p>{product.description}</p>
-            <p className="text-success fw-bold">قیمت: {product.price} تومان</p>
-            <button
-              className="btn btn-primary mt-3"
-              onClick={() => alert("Add to Cart Clicked!")}
-            >
-              افزودن به سبد خرید
-            </button>
-          </div>
+          <ProductImages
+            images={product.images}
+            mainImage={mainImage}
+            setMainImage={setMainImage}
+          />
+          <ProductDetails
+            name={product.name}
+            description={product.description}
+            price={product.price}
+            onAddToCart={() => alert("Add to Cart Clicked!")}
+          />
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }
