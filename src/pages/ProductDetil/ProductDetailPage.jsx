@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import React, { useState, useEffect , useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./ProductDetailPage.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -36,7 +36,7 @@ function ProductDetailPage() {
 
   const handleAddToCart = async () => {
     try {
-      await addToCart(productId, 1);;
+      await addToCart(productId, 1);
       alert("Product added to cart successfully!");
     } catch (error) {
       alert("Failed to add product to cart. Please try again.");
@@ -54,6 +54,7 @@ function ProductDetailPage() {
             setMainImage={setMainImage}
           />
           <ProductDetails
+            productId={product.id}
             name={product.name}
             description={product.description}
             price={product.price}

@@ -1,7 +1,33 @@
-
-  @media (max-width: 992px) {
-    .rtl-text {
-      text-align: center;
-      direction: rtl;
-    }
+@media (max-width: 992px) {
+  .rtl-text {
+    text-align: center;
+    direction: rtl;
   }
+}
+
+.quantity-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Creates space between the buttons and quantity */
+  margin-top: 20px;
+}
+
+.quantity-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quantity-display {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-top: 2px; /* Aligns the quantity number nicely */
+}
