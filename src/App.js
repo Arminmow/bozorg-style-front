@@ -6,12 +6,12 @@ import ProductsPage from "./pages/Products/Products";
 import AuthPage from "./pages/Login/AuthPage";
 import DashboardPage from "./pages/Dashboard/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import { UserProvider } from "./contexts/UserContext";
 import ProductDetailPage from "./pages/ProductDetil/ProductDetailPage";
+import Providers from "./providers/Providers";
 
 function App() {
   return (
-    <UserProvider>
+    <Providers>
       <Routes>
         {/* Define Routes */}
         <Route path="/" element={<Home />} />
@@ -30,7 +30,7 @@ function App() {
         {/* Catch-All Route */}
         {/* <Route path="*" element={<NotFoundPage />} /> */}
       </Routes>
-    </UserProvider>
+    </Providers>
   );
 }
 
