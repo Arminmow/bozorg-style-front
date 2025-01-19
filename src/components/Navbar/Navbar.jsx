@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
-import axiosInstance from "../../api/axios";
 
 function Navbar() {
-
   return (
-    <nav className="navbar navbar-expand-lg">
+    <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container-fluid">
         {/* Hamburger Menu (Mobile) */}
         <button

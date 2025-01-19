@@ -1,72 +1,89 @@
+/* Importing Persian font */
+@import url('https://fonts.googleapis.com/css2?family=Vazir&display=swap');
+
 /* Navbar Styling */
 .navbar {
-    background-color: #d9384a;
-    padding-inline: 2rem;
-  }
-  
-  .navbar-brand,
-  .nav-link,
+  background-color: #d9384a; /* Keeping the red background */
+  padding: 0.5rem 2rem;
+  font-family: 'Vazir', sans-serif; /* Apply Persian font */
+}
+
+/* Logo Styling */
+.navbar-brand {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #f1f1f1; /* Light white for better contrast */
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.3s ease; /* Smooth transition for hover */
+}
+
+.navbar-brand:hover {
+  color: #ff5c8d; /* Light pink on hover for logo */
+}
+
+/* Navbar Links Styling */
+.nav-link {
+  font-weight: bold;
+  color: #f1f1f1; /* Light white for links */
+  margin-right: 1rem;
+  text-transform: capitalize;
+  transition: color 0.3s ease; /* Smooth transition for hover */
+}
+
+.nav-link:hover {
+  color: #ff5c8d; /* Light pink on hover for links */
+}
+
+/* User Icon Styling */
+.user-icon {
+  font-size: 1.6rem;
+  color: #f1f1f1; /* Light white for icon */
+  margin-left: 1rem;
+  transition: transform 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+}
+
+.user-icon:hover {
+  color: #ff5c8d; /* Light pink color on hover */
+  transform: scale(1.2); /* Zoom effect on hover */
+}
+
+.user-icon i {
+  font-size: 1.6rem;
+}
+
+/* Mobile Navbar Adjustments */
+@media (max-width: 992px) {
   .user-icon {
-    color: white; /* White text */
+    order: -1; /* Ensures it remains outside the hamburger menu */
   }
-  
-  .navbar-brand:hover,
-  .nav-link:hover,
-  .user-icon:hover {
-    color: #8f2531; /* Cool hover effect: lighter red-pink */
-    text-decoration: none; /* Remove underline on hover */
+
+  .navbar-nav {
+    text-align: right; /* Right-align nav items in mobile view */
   }
-  
-  /* User Icon Styling */
-  .user-icon {
-    font-size: 1.2rem;
-    cursor: pointer;
-    margin-left: 1rem;
+
+  .navbar-toggler {
+    border: none;
   }
-  
-  /* Navbar Links Styling */
+  .navbar-brand{
+    color: #f1f1f1;
+  }
+
+  /* .navbar-toggler-icon {
+    background-color: white; /* Hamburger icon color */
+  /* } */
+
+  .navbar-collapse {
+    justify-content: flex-end;
+  }
+
+  .nav-item {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
   .nav-link {
-    font-weight: bold;
-    color: white;
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
   }
-  
-  .nav-link:hover {
-    color: #8f2531; /* Hover color for links */
-  }
-  
-  /* Navbar Dropdown */
-  .user-dropdown {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-  
-  .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    z-index: 1000;
-    overflow: hidden;
-  }
-  
-  .dropdown-item {
-    padding: 10px 20px;
-    color: #333;
-    text-decoration: none;
-    display: block;
-  }
-  
-  .dropdown-item:hover {
-    background-color: #f1f1f1;
-  }
-  
-  /* Mobile Navbar Adjustments */
-  @media (max-width: 992px) {
-    .user-dropdown {
-      order: -1; /* Ensures it remains outside the hamburger menu */
-    }
-  }
-  
+}
