@@ -32,10 +32,10 @@ const DashboardSidebar = ({ setActiveComponent }) => {
         <ListGroupItem
           tag="button"
           action
-          onClick={() => handleOptionClick("favorites")}
+          onClick={() => handleOptionClick("cart")}
           className="d-flex align-items-center justify-content-end"
         >
-          <span className="me-2">علاقه‌مندی‌ها</span>
+          <span className="me-2">سبد خرید</span>
           <i className="bi bi-heart"></i>
         </ListGroupItem>
         <ListGroupItem
