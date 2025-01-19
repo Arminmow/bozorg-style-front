@@ -12,6 +12,7 @@ export const CartProvider = ({ children }) => {
     const fetchCart = async () => {
       try {
         const response = await axiosInstance.get("/cart");
+
         setCart(response.data.cart || []);
       } catch (error) {
         console.error("Error fetching cart:", error);
@@ -33,8 +34,23 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  const updateQuantity = async (productId, action) => {
+    try {
+      if (action === "add") {
+        // Reuse the addToCart logic to increase the quantity
+        await addToCart(productId, 1); // Increase quantity by 1
+      } else if (action === "remove") {
+        // For now, just log the removal action until backend logic is ready
+        console.log(`Removing product with ID: ${productId} from the cart.`);
+        // Here we will implement the removal logic once the backend is ready
+      }
+    } catch (error) {
+      console.error("Error updating quantity in cart", error);
+    }
+  };
+
   return (
-    <CartContext.Provider value={{ cart, addToCart }}>
+    <CartContext.Provider value={{ cart, addToCart, updateQuantity }}>
       {children}
     </CartContext.Provider>
   );
