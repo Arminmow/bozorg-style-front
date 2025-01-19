@@ -1,7 +1,8 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./AddProductPage.css";
 import Navbar from "../../components/Navbar/Navbar";
 import axiosInstance from "../../api/axios";
+import axios from "axios";
 
 const AddProductPage = () => {
   const [categories, setCategories] = useState([]);
@@ -13,6 +14,9 @@ const AddProductPage = () => {
     category: "1",
     images: [],
   });
+
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [uploadUrls, setUploadUrls] = useState([]);
 
   useEffect(() => {
     // Fetch categories for the filter
@@ -36,9 +40,46 @@ const AddProductPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Submitted data:", formData);
+    if (!selectedImages.length) {
+      alert("Please select images to upload.");
+      return;
+    }
+
+    // Upload images
+    const urls = await uploadImages();
+    setUploadUrls(urls);
+
+    console.log("Uploaded image URLs:", urls);
+  };
+
+  const uploadImages = async () => {
+    const uploadedUrls = [];
+    const IMGBB_API_KEY = "bef67ffa7c4d506ef0a52bcd602c8643";
+
+    for (let image of selectedImages) {
+      const formData = new FormData();
+      formData.append("key", IMGBB_API_KEY); // Append the API key
+      formData.append("image", image); // Append the image file
+
+      try {
+        const response = await axios.post(
+          "https://api.imgbb.com/1/upload",
+          formData
+        );
+        console.log(response);
+
+        if (response.data.success) {
+          uploadedUrls.push(response.data.data.url); // Collect the uploaded image URL
+        }
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      }
+    }
+
+    return uploadedUrls; // Return all uploaded image URLs
   };
 
   return (
@@ -146,11 +187,9 @@ const AddProductPage = () => {
             </label>
             <input
               type="file"
-              className="form-control"
-              id="images"
-              name="images"
-              onChange={handleFileChange}
               multiple
+              accept="image/*"
+              onChange={(e) => setSelectedImages(e.target.files)}
             />
             {formData.images.length > 0 && (
               <div className="image-preview mt-3">
