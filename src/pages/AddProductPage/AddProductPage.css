@@ -1,0 +1,83 @@
+.add-product-page {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: "Roboto", sans-serif;
+}
+
+.add-product-page h2 {
+  color: #d9384a;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-weight: bold;
+  color: #333;
+}
+
+.form-control,
+.form-select {
+  border: 1px solid #d9384a;
+  border-radius: 5px;
+  padding: 10px;
+  transition: all 0.3s;
+}
+
+.form-control:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #a02b3b;
+  box-shadow: 0 0 5px rgba(217, 56, 74, 0.5);
+}
+
+.form-check-input {
+  accent-color: #d9384a;
+}
+
+.btn {
+  background-color: #d9384a;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #a02b3b;
+}
+
+.image-preview {
+  border: 1px dashed #d9384a;
+  padding: 10px;
+  border-radius: 5px;
+  background: #fff;
+}
+
+.image-preview p {
+  margin: 0;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .add-product-page {
+    padding: 15px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}
+.add-product-page {
+  margin-top: 80px; /* Adjust based on the navbar height */
+}
