@@ -5,6 +5,9 @@ import axiosInstance from "../../api/axios";
 import axios from "axios";
 
 const AddProductPage = () => {
+  const IMGBB_API_KEY = process.env.REACT_APP_IMGBB_API_KEY;
+  console.log(IMGBB_API_KEY);
+  
   const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
     title: "",
