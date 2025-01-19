@@ -6,8 +6,16 @@ const submitFullProductToBackend = async (productDetails, selectedImages) => {
   try {
     // Step 1: Submit the product details to the backend
     const productResponse = await submitProductToAPI(productDetails);
-    const productId = productResponse.product.id;  // Assuming productResponse has the product info
-
+    console.log('response from that:');
+    console.log(productResponse);
+    console.log(productResponse.id);
+    
+    
+    const productId = productResponse.id;  // Assuming productResponse has the product info
+    console.log('product id from that:');
+    
+    console.log(productId);
+    
     // Step 2: Convert images to URLs
     const imageUrls = await convertImagesToUrls(selectedImages);
 

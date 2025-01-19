@@ -1,4 +1,10 @@
+import axios from "axios";
+
 const convertImagesToUrls = async (images) => {
+  console.log('upload these images:');
+  console.log(images);
+  
+  
   const uploadedUrls = [];
   const IMGBB_API_KEY = process.env.REACT_APP_IMGBB_API_KEY;
 
@@ -16,7 +22,10 @@ const convertImagesToUrls = async (images) => {
         "https://api.imgbb.com/1/upload",
         formData
       );
-
+      console.log('response for uploading image:');
+      console.log(response);
+      
+      
       if (response.data.success) {
         uploadedUrls.push(response.data.data.url);
       }

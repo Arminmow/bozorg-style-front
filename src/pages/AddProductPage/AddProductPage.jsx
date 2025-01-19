@@ -2,24 +2,20 @@ import React, { useState, useEffect } from "react";
 import "./AddProductPage.css";
 import Navbar from "../../components/Navbar/Navbar";
 import axiosInstance from "../../api/axios";
+import submitFullProductToBackend from "../../modules/SubmitFullProductToBackend/submitFullProductToBackend";
 import axios from "axios";
 
 const AddProductPage = () => {
-  const IMGBB_API_KEY = process.env.REACT_APP_IMGBB_API_KEY;
-  console.log(IMGBB_API_KEY);
-  
   const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
-    title: "",
+    name: "",
     description: "",
     price: "",
     gender: "male",
-    category: "1",
+    category_id: "1",
     images: [],
   });
-
   const [selectedImages, setSelectedImages] = useState([]);
-  const [uploadUrls, setUploadUrls] = useState([]);
 
   useEffect(() => {
     // Fetch categories for the filter
@@ -33,56 +29,40 @@ const AddProductPage = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
-  const handleFileChange = (e) => {
-    setFormData({
-      ...formData,
-      images: [...formData.images, ...e.target.files],
-    });
+    // Check if the input name is category_id and convert to number
+    if (name === "category_id") {
+      setFormData({
+        ...formData,
+        [name]: parseInt(value, 10), // Convert category_id to a number
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitted data:", formData);
+    console.log("submiting this data");
+    console.log(formData);
+    
+    
     if (!selectedImages.length) {
       alert("Please select images to upload.");
       return;
     }
 
-    // Upload images
-    const urls = await uploadImages();
-    setUploadUrls(urls);
-
-    console.log("Uploaded image URLs:", urls);
-  };
-
-  const uploadImages = async () => {
-    const uploadedUrls = [];
-    const IMGBB_API_KEY = "bef67ffa7c4d506ef0a52bcd602c8643";
-
-    for (let image of selectedImages) {
-      const formData = new FormData();
-      formData.append("key", IMGBB_API_KEY); // Append the API key
-      formData.append("image", image); // Append the image file
-
-      try {
-        const response = await axios.post(
-          "https://api.imgbb.com/1/upload",
-          formData
-        );
-        console.log(response);
-
-        if (response.data.success) {
-          uploadedUrls.push(response.data.data.url); // Collect the uploaded image URL
-        }
-      } catch (error) {
-        console.error("Error uploading image:", error);
-      }
+    try {
+      // Directly pass the formData to the function
+      await submitFullProductToBackend(formData, selectedImages);
+      alert("Product added successfully!");
+    } catch (error) {
+      console.error("Error submitting product:", error);
+      alert("Failed to add product. Please try again.");
     }
-
-    return uploadedUrls; // Return all uploaded image URLs
   };
 
   return (
@@ -99,7 +79,7 @@ const AddProductPage = () => {
               type="text"
               className="form-control"
               id="title"
-              name="title"
+              name="name"
               value={formData.title}
               onChange={handleInputChange}
               required
@@ -142,12 +122,12 @@ const AddProductPage = () => {
                   type="radio"
                   name="gender"
                   id="male"
-                  value="male"
-                  checked={formData.gender === "male"}
+                  value="men"
+                  checked={formData.gender === "men"}
                   onChange={handleInputChange}
                 />
                 <label className="form-check-label" htmlFor="male">
-                  Male
+                  Men
                 </label>
               </div>
               <div className="form-check form-check-inline">
@@ -156,12 +136,12 @@ const AddProductPage = () => {
                   type="radio"
                   name="gender"
                   id="female"
-                  value="female"
-                  checked={formData.gender === "female"}
+                  value="women"
+                  checked={formData.gender === "women"}
                   onChange={handleInputChange}
                 />
                 <label className="form-check-label" htmlFor="female">
-                  Female
+                  Women
                 </label>
               </div>
             </div>
@@ -172,13 +152,13 @@ const AddProductPage = () => {
             </label>
             <select
               className="form-select"
-              id="category"
-              name="category"
+              id="category_id"
+              name="category_id"
               value={formData.category}
               onChange={handleInputChange}
             >
               {categories.map((category) => (
-                <option key={category.id} value={category.id}>
+                <option key={category.id} value={parseInt(category.id)}>
                   {category.name}
                 </option>
               ))}
