@@ -12,6 +12,7 @@ const UserInfoComponent = () => {
   return (
     <div className="user-info-content p-4 bg-white rounded shadow-sm">
       <h3>اطلاعات کاربر</h3>
+      
       <ShowForLoggedIn user={user}>
         <LoggedIn>
           <p>Welcome, {user?.name}</p>
@@ -22,8 +23,9 @@ const UserInfoComponent = () => {
       </ShowForLoggedIn>
 
       <ShowForAdmin user={user}>
-        <h1>HAHA You're admin</h1>
+        <h1> You're admin</h1>
       </ShowForAdmin>
+
     </div>
   );
 };
