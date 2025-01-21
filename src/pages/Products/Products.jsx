@@ -1,29 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import FilterComponent from "../../components/Filter/Filter";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import ProductListing from "../../components/ProductsListing/ProductsListing";
 import axiosInstance from "../../api/axios";
 import "./Products.css";
+import { generateProductPageInfo } from "../../modules/GenerateProductPageInfo/generateProductPageInfo";
 
 function ProductsPage() {
-  const { gender } = useParams();
+  const location = useLocation();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [filters, setFilters] = useState({
-    gender: gender,
-  });
+  const [filters, setFilters] = useState({});
+  const { title, description } = generateProductPageInfo(location.pathname);
+  
+  // Function to get the query parameters from the URL
+  const getQueryParams = (search) => {
+    const params = new URLSearchParams(search);
+    return {
+      gender: params.get("gender"),
+      category_id: params.get("category_id"),
+    };
+  };
 
-  const fetchProducts = async () => {
+  // Fetch products based on filters
+  const fetchProducts = async (filters) => {
     try {
-      console.log(filters);
-      
+      console.log('fetching with filters:', filters);
+
       const response = await axiosInstance.get("products", {
         params: filters,
       });
-      
+
       setProducts(response.data);
       setLoading(false);
     } catch (err) {
@@ -33,20 +43,21 @@ function ProductsPage() {
   };
 
   useEffect(() => {
-    // Fetch all products on component mount
-    fetchProducts();
-  }, []);
+    // Get query params from URL and set filters
+    const { gender, category_id } = getQueryParams(location.search);
+    const updatedFilters = {};
+
+    if (gender) updatedFilters.gender = gender;
+    if (category_id) updatedFilters.category_id = category_id;
+
+    setFilters(updatedFilters);  // This will trigger fetchProducts when filters change
+  }, [location.search]);  // Only run when URL changes
 
   useEffect(() => {
-    // Function to execute when filters change
-    const applyFilters = () => {
-      console.log("Filters updated:", filters);
-      fetchProducts();
-      // Add your logic here, e.g., fetching data with the updated filters
-    };
-
-    applyFilters();
-  }, [filters]); // Runs whenever 'filters' changes
+    if (filters.gender || filters.category_id) {
+      fetchProducts(filters);  // Fetch products only when filters are updated
+    }
+  }, [filters]);  // This will run every time filters change
 
   if (loading) {
     return <div>Loading...</div>;
@@ -61,10 +72,8 @@ function ProductsPage() {
       <Navbar />
       {/* Header section for the category */}
       <div className="category-header">
-        <h1 className="category-title">مردانه</h1>
-        <p className="category-description">
-          استایل مردونه خودتو پیدا کن و بدرخش
-        </p>
+        <h1 className="category-title">{title}</h1>
+        <p className="category-description">{description}</p>
       </div>
       <FilterComponent setFilters={setFilters} filters={filters} />
       <ProductListing products={products} />

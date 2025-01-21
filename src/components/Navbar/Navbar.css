@@ -1,72 +1,76 @@
 /* Navbar Styling */
 .navbar {
-    background-color: #d9384a;
-    padding-inline: 2rem;
-  }
-  
-  .navbar-brand,
-  .nav-link,
-  .user-icon {
-    color: white; /* White text */
-  }
-  
-  .navbar-brand:hover,
-  .nav-link:hover,
-  .user-icon:hover {
-    color: #8f2531; /* Cool hover effect: lighter red-pink */
-    text-decoration: none; /* Remove underline on hover */
-  }
-  
-  /* User Icon Styling */
-  .user-icon {
-    font-size: 1.2rem;
-    cursor: pointer;
-    margin-left: 1rem;
-  }
-  
-  /* Navbar Links Styling */
-  .nav-link {
-    font-weight: bold;
-    color: white;
-  }
-  
-  .nav-link:hover {
-    color: #8f2531; /* Hover color for links */
-  }
-  
-  /* Navbar Dropdown */
+  background-color: #d9384a;
+  padding-inline: 2rem;
+  font-family: 'Vazir', sans-serif; /* Apply Persian font */
+  padding-inline: 2rem !important
+}
+
+/* Load Persian font */
+@import url('https://fonts.googleapis.com/css2?family=Vazir&display=swap');
+
+/* General Navbar Text Color */
+.navbar-brand,
+.nav-link,
+.user-icon {
+  color: white !important; /* Ensure all navbar text is white */
+}
+
+/* Navbar Links Hover Effect */
+.navbar-brand:hover,
+.nav-link:hover,
+.user-icon:hover {
+  color: #8f2531 !important; /* Lighter red-pink color for hover */
+  text-decoration: none; /* Remove underline on hover */
+}
+
+/* User Icon Styling */
+.user-icon {
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+/* Navbar Links Styling */
+.nav-link {
+  font-weight: bold;
+  color: white !important;
+}
+
+/* Mobile Navbar Adjustments */
+@media (max-width: 992px) {
   .user-dropdown {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-  
-  .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    z-index: 1000;
-    overflow: hidden;
-  }
-  
-  .dropdown-item {
-    padding: 10px 20px;
-    color: #333;
-    text-decoration: none;
-    display: block;
-  }
-  
-  .dropdown-item:hover {
-    background-color: #f1f1f1;
-  }
-  
-  /* Mobile Navbar Adjustments */
-  @media (max-width: 992px) {
-    .user-dropdown {
       order: -1; /* Ensures it remains outside the hamburger menu */
-    }
   }
-  
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+/* Dropdown Item Styling */
+.dropdown-item {
+  color: #333;
+  padding: 10px 20px;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+  color: #d9384a; /* Color for hover on dropdown items */
+}
+
+/* Adjusting the font size and alignment for mobile */
+@media (max-width: 768px) {
+  .navbar {
+      padding-inline: 1rem;
+  }
+  .navbar-brand {
+      font-size: 1.5rem;
+  }
+  .user-icon {
+      font-size: 1.5rem;
+  }
+}

@@ -1,12 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState , useContext} from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
-import axiosInstance from "../../api/axios";
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import { ShowForLoggedIn, LoggedIn, NotLoggedIn } from "../../modules/ShowForLoggedIn/ShowForLoggedIn";
+import UserContext from "../../contexts/UserContext";
+
 
 function Navbar() {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { user } = useContext(UserContext);
+
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
   return (
-    <nav className="navbar navbar-expand-lg">
+    <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container-fluid">
         {/* Hamburger Menu (Mobile) */}
         <button
@@ -26,10 +33,37 @@ function Navbar() {
           بزرگ استایل
         </Link>
 
-        {/* User Icon */}
-        <Link className="order-2 user-icon" to="/register">
-          <i className="fas fa-user"></i>
-        </Link>
+        {/* User Icon Dropdown */}
+        <div className="order-2">
+          <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
+            <DropdownToggle tag="span" className="user-icon">
+              <i className="fas fa-user"></i>
+            </DropdownToggle>
+            <DropdownMenu right>
+              <ShowForLoggedIn user={user}>
+                <LoggedIn>
+                  <DropdownItem tag={Link} to="/dashboard">
+                    داشبورد
+                  </DropdownItem>
+                  <DropdownItem tag={Link} to="/dashboard/cart">
+                    سبد خرید
+                  </DropdownItem>
+                  <DropdownItem>
+                    خروج
+                  </DropdownItem>
+                </LoggedIn>
+                <NotLoggedIn>
+                  <DropdownItem tag={Link} to="/login">
+                    ورود
+                  </DropdownItem>
+                  <DropdownItem tag={Link} to="/register">
+                    ثبت نام
+                  </DropdownItem>
+                </NotLoggedIn>
+              </ShowForLoggedIn>
+            </DropdownMenu>
+          </Dropdown>
+        </div>
 
         {/* Navbar Links (Desktop) */}
         <div className="collapse navbar-collapse order-3" id="navbarNav">

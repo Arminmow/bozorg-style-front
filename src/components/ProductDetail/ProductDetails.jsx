@@ -1,15 +1,8 @@
 import React from "react";
 import "./ProductDetails.css";
-import { useContext } from "react";
-import CartContext from "../../contexts/CartContext";
 
-function ProductDetails({ productId, name, description, price, onAddToCart }) {
-  const { cart } = useContext(CartContext);
-
-  const productInCart = cart?.items?.find(
-    (item) => item.product_id === String(productId)
-  );
-  console.log(productInCart);
+function ProductDetails({ product, productInCart, onAddToCart, onUpdateQuantity }) {
+  const { name, description, price } = product;
 
   return (
     <div className="col-md-6 rtl-text">
@@ -22,6 +15,7 @@ function ProductDetails({ productId, name, description, price, onAddToCart }) {
           <button
             className="quantity-btn"
             style={{ backgroundColor: "#d9384a" }}
+            onClick={() => onUpdateQuantity("remove")}
           >
             -
           </button>
@@ -29,6 +23,7 @@ function ProductDetails({ productId, name, description, price, onAddToCart }) {
           <button
             className="quantity-btn"
             style={{ backgroundColor: "#d9384a" }}
+            onClick={() => onUpdateQuantity("add")}
           >
             +
           </button>

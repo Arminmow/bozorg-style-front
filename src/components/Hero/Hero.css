@@ -30,12 +30,13 @@
   /* Buttons */
   .hero-btn {
     position: absolute;
-    bottom: 10%;
+    bottom: 15%;
     left: 50%;
+    font-size: 20px !important;
     transform: translateX(-50%);
     background-color: #d9384a;
     color: #fff;
-    padding: 10px 20px;
+    padding: 15px 50px !important; 
     border: none;
     border-radius: 5px;
     font-weight: bold;

@@ -3,7 +3,6 @@ import "./AddProductPage.css";
 import Navbar from "../../components/Navbar/Navbar";
 import axiosInstance from "../../api/axios";
 import submitFullProductToBackend from "../../modules/SubmitFullProductToBackend/submitFullProductToBackend";
-import axios from "axios";
 
 const AddProductPage = () => {
   const [categories, setCategories] = useState([]);
@@ -16,6 +15,7 @@ const AddProductPage = () => {
     images: [],
   });
   const [selectedImages, setSelectedImages] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false); // State for button loading
 
   useEffect(() => {
     // Fetch categories for the filter
@@ -46,22 +46,22 @@ const AddProductPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submiting this data");
-    console.log(formData);
-    
-    
+
     if (!selectedImages.length) {
       alert("Please select images to upload.");
       return;
     }
 
+    setIsSubmitting(true); // Set submitting state to true
     try {
-      // Directly pass the formData to the function
       await submitFullProductToBackend(formData, selectedImages);
       alert("Product added successfully!");
+      setIsSubmitting(false); // Reset submitting state
+      window.location.reload(); // Refresh the page
     } catch (error) {
       console.error("Error submitting product:", error);
       alert("Failed to add product. Please try again.");
+      setIsSubmitting(false); // Reset submitting state
     }
   };
 
@@ -154,7 +154,7 @@ const AddProductPage = () => {
               className="form-select"
               id="category_id"
               name="category_id"
-              value={formData.category}
+              value={formData.category_id}
               onChange={handleInputChange}
             >
               {categories.map((category) => (
@@ -174,9 +174,9 @@ const AddProductPage = () => {
               accept="image/*"
               onChange={(e) => setSelectedImages(e.target.files)}
             />
-            {formData.images.length > 0 && (
+            {selectedImages.length > 0 && (
               <div className="image-preview mt-3">
-                {Array.from(formData.images).map((file, index) => (
+                {Array.from(selectedImages).map((file, index) => (
                   <p key={index} className="text-truncate">
                     {file.name}
                   </p>
@@ -184,8 +184,8 @@ const AddProductPage = () => {
               </div>
             )}
           </div>
-          <button type="submit" className="btn w-100">
-            Submit
+          <button type="submit" className="btn w-100" disabled={isSubmitting}>
+            {isSubmitting ? "Wait..." : "Submit"}
           </button>
         </form>
       </div>
