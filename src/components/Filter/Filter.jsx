@@ -52,14 +52,15 @@ const FilterComponent = ({ setFilters, filters }) => {
         <div className="flex-grow-1">
           <select
             className="form-select"
-            // value={filters.sortBy}
+            value={filters.sortBy}
             onChange={handleInputChange}
           >
-            <option value="">Sort By</option>
-            <option value="price_low_to_high">Price: Low to High</option>
-            <option value="price_high_to_low">Price: High to Low</option>
-            <option value="newest">Newest</option>
-            <option value="popular">Most Popular</option>
+            <option value="" disabled selected>
+              مرتب‌ سازی
+            </option>
+            <option value="price_low_to_high">قیمت: از کم به زیاد</option>
+            <option value="price_high_to_low">قیمت: از زیاد به کم</option>
+            <option value="newest">جدیدترین</option>
           </select>
         </div>
 
@@ -68,7 +69,7 @@ const FilterComponent = ({ setFilters, filters }) => {
           <input
             type="text"
             className="form-control"
-            placeholder="Search by name"
+            placeholder="جستجو بر اساس نام"
             // value={filters.name}
             onChange={handleInputChange}
           />
@@ -77,13 +78,16 @@ const FilterComponent = ({ setFilters, filters }) => {
         {/* Price Range */}
         <div className="flex-grow-1">
           <Dropdown isOpen={priceDropdown} toggle={togglePriceDropdown}>
-            <DropdownToggle caret className="btn btn-secondary w-100 priceRange">
-              Price Range
+            <DropdownToggle
+              caret
+              className="btn btn-secondary w-100 priceRange"
+            >
+              بازه قیمت
             </DropdownToggle>
             <DropdownMenu className="p-3 w-100">
               <div>
                 <label htmlFor="minPrice" className="form-label">
-                  Min Price: <strong>{params.min_price}</strong>
+                  حداقل قیمت: <strong>{params.min_price}</strong>
                 </label>
                 <input
                   type="range"
@@ -99,7 +103,7 @@ const FilterComponent = ({ setFilters, filters }) => {
               </div>
               <div>
                 <label htmlFor="maxPrice" className="form-label">
-                  Max Price: <strong>{params.max_price}</strong>
+                  حداکثر قیمت: <strong>{params.max_price}</strong>
                 </label>
                 <input
                   type="range"
@@ -122,7 +126,6 @@ const FilterComponent = ({ setFilters, filters }) => {
           </Dropdown>
         </div>
 
-
         {/* Categories Dropdown */}
         <div className="flex-grow-1">
           <select
@@ -131,7 +134,9 @@ const FilterComponent = ({ setFilters, filters }) => {
             onChange={handleInputChange}
             name="category_id"
           >
-            <option value="">Select Category</option>
+            <option value="" disabled selected>
+              انتخاب دسته‌بندی
+            </option>
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.name}
@@ -143,7 +148,7 @@ const FilterComponent = ({ setFilters, filters }) => {
         {/* Submit Button */}
         <div>
           <button type="submit" className="btn btn-primary">
-            Apply Filters
+            اعمال فیلترها
           </button>
         </div>
       </form>
