@@ -3,6 +3,7 @@
   background-color: #d9384a;
   padding-inline: 2rem;
   font-family: 'Vazir', sans-serif; /* Apply Persian font */
+  padding-inline: 2rem !important
 }
 
 /* Load Persian font */
