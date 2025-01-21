@@ -1,48 +1,41 @@
-import { useParams, useNavigate } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
-import "./ProductDetailPage.css";
+import { useParams } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import ProductDetails from "../../components/ProductDetail/ProductDetails";
 import ProductImages from "../../components/ProductDetail/ProductImages";
 import { getProductById } from "../../modules/GetProductById/getProductById";
 import CartContext from "../../contexts/CartContext";
+import "./ProductDetailPage.css";
 
 function ProductDetailPage() {
-  const [product, setProduct] = useState(null);
-  const [mainImage, setMainImage] = useState(null); // Initialize mainImage as null
-  const { id: productId } = useParams(); // Get the product ID from the URL
-  const { cart, addToCart, updateQuantity } = useContext(CartContext);
-  const [productInCart, setProductInCart] = useState({});
+  const { id: productId } = useParams(); // Get product ID from URL
+  const [product, setProduct] = useState(null); // Product details
+  const [mainImage, setMainImage] = useState(null); // Main product image
+  const { cart, addToCart, updateQuantity } = useContext(CartContext); // Cart context
 
+  // Fetch product details
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
         const data = await getProductById(productId);
         setProduct(data);
-        setMainImage(data?.images[0]?.image_path); // Set mainImage after the product is fetched
+        setMainImage(data?.images[0]?.image_path); // Set initial main image
       } catch (error) {
         console.error("Error fetching product details", error);
       }
     };
-    setProductInCart(
-      cart?.items?.find((item) => item.product_id === String(productId))
-    );
-    fetchProductDetails();
-  }, [productId, cart]);
 
-  // Render a loading state while the product is being fetched
+    fetchProductDetails();
+  }, [productId]);
+
+  // Determine if the product is already in the cart
+  const productInCart = cart?.items?.find((item) => item.product_id === String(productId));
+
+  // Loading state
   if (!product) {
     return <div>Loading...</div>;
   }
-
-  const handleAddToCart = () => {
-    addToCart(productId, 1); // Add product to cart with quantity 1
-  };
-
-  const handleUpdateQuantity = (action) => {
-    updateQuantity(productId, action); // Call updateQuantity to handle add/remove actions
-  };
 
   return (
     <>
@@ -55,13 +48,10 @@ function ProductDetailPage() {
             setMainImage={setMainImage}
           />
           <ProductDetails
-            productId={product.id}
-            name={product.name}
-            description={product.description}
-            price={product.price}
-            onAddToCart={handleAddToCart}
+            product={product}
             productInCart={productInCart}
-            onUpdateQuantity={handleUpdateQuantity}
+            onAddToCart={() => addToCart(productId, 1)}
+            onUpdateQuantity={(action) => updateQuantity(productId, action)}
           />
         </div>
       </div>

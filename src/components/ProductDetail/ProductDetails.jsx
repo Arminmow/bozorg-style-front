@@ -1,7 +1,9 @@
 import React from "react";
 import "./ProductDetails.css";
 
-function ProductDetails({ productId, name, description, price, onAddToCart, productInCart, onUpdateQuantity }) {
+function ProductDetails({ product, productInCart, onAddToCart, onUpdateQuantity }) {
+  const { name, description, price } = product;
+
   return (
     <div className="col-md-6 rtl-text">
       <h1 className="rtl-text">{name}</h1>
@@ -13,7 +15,7 @@ function ProductDetails({ productId, name, description, price, onAddToCart, prod
           <button
             className="quantity-btn"
             style={{ backgroundColor: "#d9384a" }}
-            onClick={() => onUpdateQuantity("remove")} // Call remove action
+            onClick={() => onUpdateQuantity("remove")}
           >
             -
           </button>
@@ -21,7 +23,7 @@ function ProductDetails({ productId, name, description, price, onAddToCart, prod
           <button
             className="quantity-btn"
             style={{ backgroundColor: "#d9384a" }}
-            onClick={() => onUpdateQuantity("add")} // Call add action
+            onClick={() => onUpdateQuantity("add")}
           >
             +
           </button>
