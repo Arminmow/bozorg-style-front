@@ -9,7 +9,7 @@ function HeroSection() {
     <div className="hero-section d-flex flex-column flex-lg-row position-relative">
       {/* Men Section */}
       <div className="hero-image men position-relative">
-        <Link to="men">
+        <Link to="/products?gender=men">
           <img src={menImage} alt="Men Clothing" className="img-fluid" />
         </Link>
 
@@ -18,7 +18,7 @@ function HeroSection() {
 
       {/* Women Section */}
       <div className="hero-image women position-relative">
-        <Link to="women">
+        <Link to="/products?gender=women">
           <img src={womenImage} alt="Women Clothing" className="img-fluid" />
         </Link>
 

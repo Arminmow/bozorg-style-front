@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import FilterComponent from "../../components/Filter/Filter";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
@@ -11,18 +10,25 @@ import { generateProductPageInfo } from "../../modules/GenerateProductPageInfo/g
 
 function ProductsPage() {
   const location = useLocation();
-  const { gender } = useParams();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [filters, setFilters] = useState({
-    gender: gender,
-  });
+  const [filters, setFilters] = useState({});
   const { title, description } = generateProductPageInfo(location.pathname);
 
-  const fetchProducts = async () => {
+  // Function to get the query parameters from the URL
+  const getQueryParams = (search) => {
+    const params = new URLSearchParams(search);
+    return {
+      gender: params.get("gender"),
+      category_id: params.get("category_id"),
+    };
+  };
+
+  // Fetch products based on filters
+  const fetchProducts = async (filters) => {
     try {
-      console.log(filters);
+      console.log('fetching with filters:', filters);
 
       const response = await axiosInstance.get("products", {
         params: filters,
@@ -37,20 +43,21 @@ function ProductsPage() {
   };
 
   useEffect(() => {
-    // Fetch all products on component mount
-    fetchProducts();
-  }, []);
+    // Get query params from URL and set filters
+    const { gender, category_id } = getQueryParams(location.search);
+    const updatedFilters = {};
+
+    if (gender) updatedFilters.gender = gender;
+    if (category_id) updatedFilters.category_id = category_id;
+
+    setFilters(updatedFilters);  // This will trigger fetchProducts when filters change
+  }, [location.search]);  // Only run when URL changes
 
   useEffect(() => {
-    // Function to execute when filters change
-    const applyFilters = () => {
-      console.log("Filters updated:", filters);
-      fetchProducts();
-      // Add your logic here, e.g., fetching data with the updated filters
-    };
-
-    applyFilters();
-  }, [filters]); // Runs whenever 'filters' changes
+    if (filters.gender || filters.category_id) {
+      fetchProducts(filters);  // Fetch products only when filters are updated
+    }
+  }, [filters]);  // This will run every time filters change
 
   if (loading) {
     return <div>Loading...</div>;

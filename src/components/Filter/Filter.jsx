@@ -38,10 +38,6 @@ const FilterComponent = ({ setFilters, filters }) => {
     }));
   };
 
-  const toggleCollapse = () => {
-    setIsCollapsed(!isCollapsed); // Toggle the collapse state
-  };
-
   return (
     <div className="container-fluid bg-light border p-3">
       <form
