@@ -6,13 +6,15 @@ import {
   LoggedIn,
   NotLoggedIn,
 } from "../../modules/ShowForLoggedIn/ShowForLoggedIn";
+import { Link } from "react-router-dom";
+import './UserInfoComponent.css'
 
 const UserInfoComponent = () => {
   const { user } = useContext(UserContext);
   return (
     <div className="user-info-content p-4 bg-white rounded shadow-sm">
       <h3>اطلاعات کاربر</h3>
-      
+
       <ShowForLoggedIn user={user}>
         <LoggedIn>
           <p>Welcome, {user?.name}</p>
@@ -23,9 +25,10 @@ const UserInfoComponent = () => {
       </ShowForLoggedIn>
 
       <ShowForAdmin user={user}>
-        <h1> You're admin</h1>
+        <Link to="/product/add" className="add-product-btn">
+          Add a product
+        </Link>
       </ShowForAdmin>
-
     </div>
   );
 };
