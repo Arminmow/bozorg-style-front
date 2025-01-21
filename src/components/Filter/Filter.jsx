@@ -9,8 +9,6 @@ const FilterComponent = ({ setFilters, filters }) => {
   const [params, setparams] = useState({});
   const [priceDropdown, setPriceDropdown] = useState(false);
   const togglePriceDropdown = () => setPriceDropdown(!priceDropdown);
-  const [isCollapsed, setIsCollapsed] = useState(false); // For handling collapsible filter
-
   useEffect(() => {
     // Fetch categories for the filter
     axiosInstance
@@ -146,6 +144,7 @@ const FilterComponent = ({ setFilters, filters }) => {
           <button type="submit" className="btn btn-primary">
             اعمال فیلترها
           </button>
+          
         </div>
       </form>
     </div>

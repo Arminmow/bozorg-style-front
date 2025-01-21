@@ -15,7 +15,7 @@ function ProductsPage() {
   const [error, setError] = useState(null);
   const [filters, setFilters] = useState({});
   const { title, description } = generateProductPageInfo(location.pathname);
-
+  
   // Function to get the query parameters from the URL
   const getQueryParams = (search) => {
     const params = new URLSearchParams(search);
