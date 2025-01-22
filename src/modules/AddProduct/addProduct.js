@@ -1,13 +1,9 @@
 import axiosInstance from "../../api/axios";
 
 const submitProductToAPI  = async (productData) => {
-  console.log('product detail:');
-  
-  console.log(productData);
   
     try {
       const response = await axiosInstance.post('/products/add', productData);
-      console.log(response);
       
       if (response.data.success) {
         return response.data.product; // The added product object from the backend

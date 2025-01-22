@@ -14,7 +14,7 @@ function ProductsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [filters, setFilters] = useState({});
-  const { title, description } = generateProductPageInfo(location.pathname);
+  const { title, description } = generateProductPageInfo(location);
   
   // Function to get the query parameters from the URL
   const getQueryParams = (search) => {
@@ -28,7 +28,6 @@ function ProductsPage() {
   // Fetch products based on filters
   const fetchProducts = async (filters) => {
     try {
-      console.log('fetching with filters:', filters);
 
       const response = await axiosInstance.get("products", {
         params: filters,

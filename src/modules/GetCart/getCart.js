@@ -11,7 +11,6 @@ const getCart = async () => {
         product_id: item.product_id,
         quantity: item.quantity,
       }));
-      console.log(preparedItems);
       
       return preparedItems;
     } else {

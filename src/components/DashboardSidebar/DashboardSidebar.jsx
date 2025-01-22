@@ -8,7 +8,6 @@ const DashboardSidebar = ({ setActiveComponent }) => {
     setActiveComponent(option);
   };
   const { user } = useContext(UserContext);
-  console.log(user);
 
   return (
     <div className="sidebar bg-light p-3 rounded shadow-sm">

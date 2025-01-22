@@ -38,8 +38,6 @@ const LoginForm = () => {
         password: formValues.password,
       });
 
-      console.log(response.data);
-
       const { token } = response.data;
 
       // Store the JWT token securely
