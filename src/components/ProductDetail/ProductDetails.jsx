@@ -1,7 +1,12 @@
 import React from "react";
 import "./ProductDetails.css";
 
-function ProductDetails({ product, productInCart, onAddToCart, onUpdateQuantity }) {
+function ProductDetails({
+  product,
+  productInCart,
+  onAddToCart,
+  onUpdateQuantity,
+}) {
   const { name, description, price } = product;
 
   return (

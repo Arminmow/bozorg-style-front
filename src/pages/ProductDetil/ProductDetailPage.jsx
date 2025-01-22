@@ -7,12 +7,16 @@ import ProductImages from "../../components/ProductDetail/ProductImages";
 import { getProductById } from "../../modules/GetProductById/getProductById";
 import CartContext from "../../contexts/CartContext";
 import "./ProductDetailPage.css";
+import UserContext from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 function ProductDetailPage() {
+  const { user } = useContext(UserContext);
   const { id: productId } = useParams(); // Get product ID from URL
   const [product, setProduct] = useState(null); // Product details
   const [mainImage, setMainImage] = useState(null); // Main product image
   const { cart, addToCart, updateQuantity } = useContext(CartContext); // Cart context
+  const navigate = useNavigate();
 
   // Fetch product details
   useEffect(() => {
@@ -30,7 +34,18 @@ function ProductDetailPage() {
   }, [productId]);
 
   // Determine if the product is already in the cart
-  const productInCart = cart?.items?.find((item) => item.product_id === String(productId));
+  const productInCart = cart?.items?.find(
+    (item) => item.product_id === String(productId)
+  );
+
+  const handleAddToCart = () => {
+    if (!user) {
+      alert("لطفاً وارد حساب کاربری خود شوید"); // "Please log in" in Persian
+      navigate("/login"); // Redirect to the login page
+    } else {
+      addToCart(productId, 1);
+    }
+  };
 
   // Loading state
   if (!product) {
@@ -50,7 +65,7 @@ function ProductDetailPage() {
           <ProductDetails
             product={product}
             productInCart={productInCart}
-            onAddToCart={() => addToCart(productId, 1)}
+            onAddToCart={handleAddToCart}
             onUpdateQuantity={(action) => updateQuantity(productId, action)}
           />
         </div>
