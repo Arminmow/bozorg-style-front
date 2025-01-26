@@ -11,7 +11,6 @@ const CartDisplay = ({ onIncrease, onDecrease }) => {
   const [loading, setLoading] = useState(true);
   const { cart, addToCart, updateQuantity } = useContext(CartContext);
 
-  // Fetch cart and product details
   useEffect(() => {
     const fetchCart = async () => {
       try {
@@ -39,31 +38,6 @@ const CartDisplay = ({ onIncrease, onDecrease }) => {
 
     fetchCart();
   }, []);
-
-  // Function to handle quantity update
-  const handleQuantityChange = async (productId, action) => {
-    try {
-      await updateQuantity(productId, action); // Update the quantity in the cart
-      // Re-fetch updated cart after quantity change
-      const updatedCart = await getCart();
-      const updatedItems = await Promise.all(
-        updatedCart.map(async (item) => {
-          const productDetail = await getProductById(item.product_id);
-          return {
-            id: productDetail.id,
-            name: productDetail.name,
-            image: productDetail.images[0]?.image_path || "",
-            price: productDetail.price,
-            quantity: item.quantity,
-          };
-        })
-      );
-
-      setCartItems(updatedItems); // Update cart items with the latest data
-    } catch (error) {
-      console.error("Error updating cart:", error);
-    }
-  };
 
   return (
     <div className="cart-container container my-4" dir="rtl">
@@ -101,7 +75,7 @@ const CartDisplay = ({ onIncrease, onDecrease }) => {
                     size="sm"
                     color="primary"
                     className="quantity-btn"
-                    onClick={() => handleQuantityChange(item.id, "remove")}
+                    onClick={() =>updateQuantity(item.id, "add")}
                   >
                     -
                   </Button>
@@ -110,7 +84,7 @@ const CartDisplay = ({ onIncrease, onDecrease }) => {
                     size="sm"
                     color="primary"
                     className="quantity-btn"
-                    onClick={() => handleQuantityChange(item.id, "add")}
+                    onClick={() =>updateQuantity(item.id, "add")}
                   >
                     +
                   </Button>
