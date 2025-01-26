@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import axiosInstance from "../api/axios";
 import { addToCart as addToCartAPI } from "../modules/AddToCart/addToCart";
+import { removeFromCartAPI } from "../modules/RemoveFromCart/removeFromCart";
 
 const CartContext = createContext();
 
@@ -37,7 +38,7 @@ export const CartProvider = ({ children }) => {
       if (action === "add") {
         await addToCartAPI(productId, 1); // Increase quantity by 1
       } else if (action === "remove") {
-        await axiosInstance.delete(`/cart/${productId}`); // Decrease or remove product
+        await removeFromCartAPI(productId); // Decrease or remove product
       }
       const updatedCart = await axiosInstance.get("/cart"); // Fetch updated cart data
       setCart(updatedCart.data.cart || []); // Update cart state
