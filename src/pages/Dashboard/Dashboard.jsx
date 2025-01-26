@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Row, Col } from "reactstrap";
+import { useLocation } from "react-router-dom";
 import DashboardSidebar from "../../components/DashboardSidebar/DashboardSidebar";
 import UserInfoComponent from "../../components/UserInfoComponent/UserInfoComponent";
 import Navbar from "../../components/Navbar/Navbar";
@@ -7,8 +8,7 @@ import Footer from "../../components/Footer/Footer";
 import CartDisplay from "../../components/CartDisplay/CartDisplay";
 
 const DashboardPage = () => {
-  // State to manage selected option
-  const [activeComponent, setActiveComponent] = useState("userInfo");
+  // State to manage cart items
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -25,18 +25,21 @@ const DashboardPage = () => {
       image: "https://via.placeholder.com/200",
     },
   ]);
+
   const handleRemove = (id) => {
     setCartItems(cartItems.filter((item) => item.id !== id));
   };
 
-  // Function to render the corresponding component
+  // Get the current URL path
+  const location = useLocation();
+  const activeComponent = location.pathname.split("/").pop(); // Extract the last segment of the path
+  
   const renderContent = () => {
     switch (activeComponent) {
-      case "userInfo":
+      case "user-info":
         return <UserInfoComponent />;
       case "cart":
         return <CartDisplay cartItems={cartItems} onRemove={handleRemove} />;
-      // Add more cases for other components when implemented
       default:
         return <UserInfoComponent />;
     }
@@ -51,7 +54,7 @@ const DashboardPage = () => {
             {renderContent()}
           </Col>
           <Col md="3">
-            <DashboardSidebar setActiveComponent={setActiveComponent} />
+            <DashboardSidebar />
           </Col>
         </Row>
       </Container>

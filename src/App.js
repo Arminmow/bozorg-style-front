@@ -9,6 +9,8 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import ProductDetailPage from "./pages/ProductDetil/ProductDetailPage";
 import Providers from "./providers/Providers";
 import AddProductPage from "./pages/AddProductPage/AddProductPage";
+import UserInfoComponent from "./components/UserInfoComponent/UserInfoComponent";
+import CartDisplay from "./components/CartDisplay/CartDisplay";
 
 function App() {
   return (
@@ -28,7 +30,10 @@ function App() {
               <DashboardPage />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route path="user-info" element={<UserInfoComponent />} />
+          <Route path="cart" element={<CartDisplay />} />
+        </Route>
         {/* Catch-All Route */}
         {/* <Route path="*" element={<NotFoundPage />} /> */}
       </Routes>

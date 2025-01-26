@@ -1,12 +1,10 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
 import { ListGroup, ListGroupItem } from "reactstrap";
 import "./DashboardSidebar.css";
 
-const DashboardSidebar = ({ setActiveComponent }) => {
-  const handleOptionClick = (option) => {
-    setActiveComponent(option);
-  };
+const DashboardSidebar = () => {
   const { user } = useContext(UserContext);
 
   return (
@@ -20,27 +18,24 @@ const DashboardSidebar = ({ setActiveComponent }) => {
       {/* Navigation Options */}
       <ListGroup flush>
         <ListGroupItem
-          tag="button"
-          action
-          onClick={() => handleOptionClick("userInfo")}
+          tag={Link}
+          to="/dashboard/user-info"
           className="d-flex align-items-center justify-content-end"
         >
           <span className="me-2">اطلاعات کاربر</span>
           <i className="bi bi-person"></i>
         </ListGroupItem>
         <ListGroupItem
-          tag="button"
-          action
-          onClick={() => handleOptionClick("cart")}
+          tag={Link}
+          to="/dashboard/cart"
           className="d-flex align-items-center justify-content-end"
         >
           <span className="me-2">سبد خرید</span>
           <i className="bi bi-heart"></i>
         </ListGroupItem>
         <ListGroupItem
-          tag="button"
-          action
-          onClick={() => handleOptionClick("logout")}
+          tag={Link}
+          to="/logout" // Adjust this route based on your logout logic
           className="d-flex align-items-center justify-content-end text-danger"
         >
           <span className="me-2">خروج</span>
