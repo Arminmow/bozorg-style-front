@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Button } from "reactstrap";
 import "./CartDisplay.css";
 import getCart from "../../modules/GetCart/getCart";
 import { getProductById } from "../../modules/GetProductById/getProductById";
 import { Link } from "react-router-dom";
+import CartContext from "../../contexts/CartContext";
 
 const CartDisplay = ({ onIncrease, onDecrease }) => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { cart, addToCart, updateQuantity } = useContext(CartContext);
 
+  // Fetch cart and product details
   useEffect(() => {
     const fetchCart = async () => {
       try {
@@ -36,6 +39,31 @@ const CartDisplay = ({ onIncrease, onDecrease }) => {
 
     fetchCart();
   }, []);
+
+  // Function to handle quantity update
+  const handleQuantityChange = async (productId, action) => {
+    try {
+      await updateQuantity(productId, action); // Update the quantity in the cart
+      // Re-fetch updated cart after quantity change
+      const updatedCart = await getCart();
+      const updatedItems = await Promise.all(
+        updatedCart.map(async (item) => {
+          const productDetail = await getProductById(item.product_id);
+          return {
+            id: productDetail.id,
+            name: productDetail.name,
+            image: productDetail.images[0]?.image_path || "",
+            price: productDetail.price,
+            quantity: item.quantity,
+          };
+        })
+      );
+
+      setCartItems(updatedItems); // Update cart items with the latest data
+    } catch (error) {
+      console.error("Error updating cart:", error);
+    }
+  };
 
   return (
     <div className="cart-container container my-4" dir="rtl">
@@ -73,7 +101,7 @@ const CartDisplay = ({ onIncrease, onDecrease }) => {
                     size="sm"
                     color="primary"
                     className="quantity-btn"
-                    onClick={() => onDecrease(item.id)}
+                    onClick={() => handleQuantityChange(item.id, "remove")}
                   >
                     -
                   </Button>
@@ -82,7 +110,7 @@ const CartDisplay = ({ onIncrease, onDecrease }) => {
                     size="sm"
                     color="primary"
                     className="quantity-btn"
-                    onClick={() => onIncrease(item.id)}
+                    onClick={() => handleQuantityChange(item.id, "add")}
                   >
                     +
                   </Button>
