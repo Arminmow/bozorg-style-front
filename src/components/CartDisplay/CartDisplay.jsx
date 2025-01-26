@@ -3,6 +3,7 @@ import { Button } from "reactstrap";
 import "./CartDisplay.css";
 import getCart from "../../modules/GetCart/getCart";
 import { getProductById } from "../../modules/GetProductById/getProductById";
+import { Link } from "react-router-dom";
 
 const CartDisplay = ({ onIncrease, onDecrease }) => {
   const [cartItems, setCartItems] = useState([]);
@@ -27,7 +28,7 @@ const CartDisplay = ({ onIncrease, onDecrease }) => {
 
         setCartItems(itemsWithDetails);
       } catch (error) {
-        alert("Error fetching cart:", error)
+        alert("Error fetching cart:", error);
       } finally {
         setLoading(false);
       }
@@ -51,11 +52,13 @@ const CartDisplay = ({ onIncrease, onDecrease }) => {
               className="cart-item d-flex flex-column flex-md-row align-items-center justify-content-between mb-4"
             >
               {/* Cart Item Image */}
-              <img
-                src={item.image}
-                className="cart-item-image"
-                alt={item.name}
-              />
+              <Link to={`/product/${item.id}`}>
+                <img
+                  src={item.image}
+                  className="cart-item-image"
+                  alt={item.name}
+                />
+              </Link>
 
               {/* Cart Item Info */}
               <div className="cart-item-info">
