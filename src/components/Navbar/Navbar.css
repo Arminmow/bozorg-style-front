@@ -62,6 +62,12 @@
   color: #d9384a; /* Color for hover on dropdown items */
 }
 
+.user-name {
+  margin-inline: 1rem;
+  color: #fff;
+  text-decoration: none;
+}
+
 /* Adjusting the font size and alignment for mobile */
 @media (max-width: 768px) {
   .navbar {

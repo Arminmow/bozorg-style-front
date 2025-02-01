@@ -1,10 +1,18 @@
-import React, { useState , useContext} from "react";
+import React, { useState, useContext } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
-import { ShowForLoggedIn, LoggedIn, NotLoggedIn } from "../../modules/ShowForLoggedIn/ShowForLoggedIn";
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
+import {
+  ShowForLoggedIn,
+  LoggedIn,
+  NotLoggedIn,
+} from "../../modules/ShowForLoggedIn/ShowForLoggedIn";
 import UserContext from "../../contexts/UserContext";
-
 
 function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -48,9 +56,7 @@ function Navbar() {
                   <DropdownItem tag={Link} to="/dashboard/cart">
                     سبد خرید
                   </DropdownItem>
-                  <DropdownItem>
-                    خروج
-                  </DropdownItem>
+                  <DropdownItem>خروج</DropdownItem>
                 </LoggedIn>
                 <NotLoggedIn>
                   <DropdownItem tag={Link} to="/login">
@@ -62,6 +68,7 @@ function Navbar() {
                 </NotLoggedIn>
               </ShowForLoggedIn>
             </DropdownMenu>
+            <Link to="/dashboard" className="user-name">{user?.name}</Link>
           </Dropdown>
         </div>
 
